@@ -1,0 +1,63 @@
+version: "3"
+services:
+ mysql_course:
+  image: mysql:5.7
+  deploy:
+   placement:
+    constraints: [node.role == manager]
+  ports:
+    - 3377:3306
+  environment:
+   MYSQL_ROOT_PASSWORD: 123456
+   MYSQL_DATABASE: lumen
+   MYSQL_USER: lumen
+   MYSQL_PASSWORD: 123456
+  networks: 
+    - microservice_course
+  volumes:
+    - "./data:/var/lib/mysql"
+ phpmyadmin_course:
+  image: phpmyadmin/phpmyadmin
+  deploy:
+   placement:
+    constraints: [node.role == manager]
+  networks:
+   - microservice_course
+  environment:
+   PMA_HOST: mysql
+   PMA_PORT: 3306
+  ports:
+   - '8091:80'
+  volumes: 
+   - /sessions
+ aplicacao_course:
+  image: leolegends/microservices_php:stable
+  # deploy:
+  #  replicas: 5
+  #  resources:
+  #   limits:
+  #    cpus: "0.1"
+  #    memory: 50MB
+  #  restart_policy:
+  #   condition: on-failure   
+  ports: 
+   - 8050:80
+  volumes:
+   - "${DIR}:/app"
+  environment:
+   WEB_DOCUMENT_ROOT: /app/public
+  networks:
+   - microservice_course
+ visualizer:
+  image: dockersamples/visualizer:stable
+  ports:
+   - "8004:8080"
+  volumes:
+   - "/var/run/docker.sock:/var/run/docker.sock"
+  deploy:
+   placement:
+    constraints: [node.role == manager]
+  networks: 
+   - microservice_course
+networks: 
+ microservice_course:  

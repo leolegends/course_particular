@@ -10,8 +10,27 @@ class TestController extends Controller
     {
         $test = [
             'nome' => "Leonardo | Yuri",
-        ];
+            'sobrenome' => "Cainã",
+            'idade' => 30
+            
+            ];
 
-        dd($test);
+            $idade = $test['idade'];
+            $nome = $test['nome'];
+
+
+            $ocorrencias = [
+                "ERRO",
+                "CHAMADO",
+                "RECLAMACAO",
+                "FINANCEIRO"
+                ];
+
+                foreach($ocorrencias as $ocorrencia){
+                    echo $ocorrencia . "<br>";     
+                    }
+                   
+
+       //dd($ocorrencias[0]);
     }
 }

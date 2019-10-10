@@ -20,6 +20,7 @@ class TestController extends Controller
 
 
             $ocorrencias = [
+                "",                
                 "ERRO",
                 "CHAMADO",
                 "RECLAMACAO",

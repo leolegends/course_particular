@@ -26,13 +26,40 @@ class TestController extends Controller
                 "FINANCEIRO"
                 ];
 
+            //todo: aumenta letras CAṔSLOCK
+            //strtoupper("string");
+
+            //todo: diminui as letras 
+            //strtolower("STRING");
+
             $quantidade_de_ocorrencias = count($ocorrencias);
 
-            
+             $a = 0;
+
+                while($a < $quantidade_de_ocorrencias){
+                    // var_dump($a);
+                    
+                    if($ocorrencias[$a] == "ERRO"){
+                        $ocorrencias[$a] = "FALHA";
+                    }else{
+                        $ocorrencias[$a] = "--------";
+                    }
+                    
+                    var_dump($ocorrencias[$a]);
+                   
+                    if($a > 0){
+                        echo "Ainda existe dados. </br>";
+                    }else{
+                        echo "Nao existem dados. </br>";
+                    }
+                    
+                    $a++;
+                }    
+
+                
 
 
 
-            
                 //TODO: Foreach, For, While. 
 
                 //? While

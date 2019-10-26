@@ -2,12 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\TestTrait;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ElementsController;
 
-class TestController extends Controller
+class TestController extends ElementsController
 {
+
+    use TestTrait; //? Essa trait é relaciada a test.
+
     public function Test()
     {
+
+        $this->TestTraitmataCodigo();
+
+        $this->setValue(100);
+        
+        $r = $this->calc("-", 5);
+        
+        dd($r);
+
+        //? Forma de usar quando importamos a classe inteira. 
+
+        // $elements = new ElementsController();
+
+        // dd($elements->valor1(100));
+
+
+        //! --------------------------------------
+
         $test = [
             'nome' => "Leonardo | Yuri",
             'sobrenome' => "Cainã",
@@ -34,32 +57,10 @@ class TestController extends Controller
 
             $quantidade_de_ocorrencias = count($ocorrencias);
 
-             $a = 0;
-
-                while($a < $quantidade_de_ocorrencias){
-                    // var_dump($a);
-                    
-                    if($ocorrencias[$a] == "ERRO"){
-                        $ocorrencias[$a] = "FALHA";
-                    }else{
-                        $ocorrencias[$a] = "--------";
-                    }
-                    
-                    var_dump($ocorrencias[$a]);
-                   
-                    if($a > 0){
-                        echo "Ainda existe dados. </br>";
-                    }else{
-                        echo "Nao existem dados. </br>";
-                    }
-                    
-                    $a++;
-                }    
-
+ 
+            $this->exibicaoDeDados($ocorrencias, $quantidade_de_ocorrencias);
                 
-
-
-
+            
                 //TODO: Foreach, For, While. 
 
                 //? While
@@ -89,5 +90,42 @@ class TestController extends Controller
                    
 
        //dd($ocorrencias[0]);
+    }
+
+    //? VOID = QUANDO NAO RETORNA NADA.
+    //? FLOAT = QUANTO RETORNA NUMERO FLOAT EX: 25.90
+    //? OBJECT = QUANDO RETORNA OBJETO.
+    //? INT = QUANDO RETORNA UM NUMERO INTEIRO EX: 100;
+    //? ARRAY = QUANDO RETORNA UM ARRAY.
+
+    public function elementosExternos()
+    {
+
+    }
+    
+
+    public function exibicaoDeDados($ocorrencias, $quantidade_de_ocorrencias) : void
+    {
+        $a = 0;
+
+        while($a < $quantidade_de_ocorrencias){
+            // var_dump($a);
+            
+            if($ocorrencias[$a] == "ERRO"){
+                $ocorrencias[$a] = "FALHA";
+            }else{
+                $ocorrencias[$a] = "--------";
+            }
+            
+            var_dump($ocorrencias[$a]);
+           
+            if($a > 0){
+                echo "Ainda existe dados. </br>";
+            }else{
+                echo "Nao existem dados. </br>";
+            }
+            
+            $a++;
+        }   
     }
 }
